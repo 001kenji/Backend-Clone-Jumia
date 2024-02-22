@@ -11,7 +11,7 @@ class UserAdmin(admin.ModelAdmin):
     search_fields = ['number']
     
     #this  is for hiding the password field so as to prevent admins from viewing the cliets password
-    exclude = ('password',)
+    #exclude = ('password',)
     
 
     
