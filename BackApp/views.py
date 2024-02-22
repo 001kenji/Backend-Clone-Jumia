@@ -1,7 +1,7 @@
 from django.shortcuts import render,HttpResponse,loader
 from .serializer import TeacherSerializer
 import json
-from .models import Teacher
+from .models import User
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
@@ -16,7 +16,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 @api_view(['GET'])
 def viewDB(request):
-    teacherDB = Teacher.objects.all().values()
+    teacherDB = User.objects.all().values()
     serializerobj = TeacherSerializer(teacherDB, many=True)
     return Response(serializerobj.data)
 
@@ -54,7 +54,7 @@ def Commit(request):
     #print(data)
     #hashedpassword = make_password(data['password'])
     #print('hashed one is -:', hashedpassword)
-    mydata = Teacher.objects.filter(email=data['email'],number=data['number'],password=data['password']).values()
+    mydata = User.objects.filter(email=data['email'],number=data['number'],password=data['password']).values()
     
     if len(mydata) > 0 :
         print(len(mydata))
@@ -64,7 +64,7 @@ def Commit(request):
         return JsonResponse(json.dumps(content), safe=False)
     
     elif len(mydata) == 0:
-        newUser = Teacher(name= data['name'], email= data['email'],password= data['password'], number = data['number'])
+        newUser = User(name= data['name'], email= data['email'],password= data['password'], number = data['number'])
         newUser.save()
         print('written')
         content = {
@@ -85,7 +85,7 @@ def UserData(request):
         print('text psscode - ', data['password'])
         #hashedsinguppassword = make_password(data['password'])
         #print('hashed signup pass- ',hashedsinguppassword)
-        mydata = Teacher.objects.filter(name=data['username'],password=data['password']).values()
+        mydata = User.objects.filter(name=data['username'],password=data['password']).values()
         
         datadisp = TeacherSerializer(mydata, many=True)
         print(datadisp.data)

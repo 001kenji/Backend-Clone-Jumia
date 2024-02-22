@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.hashers import make_password
 # Create your models here.
 
-class Teacher(models.Model):
+class User(models.Model):
     name = models.CharField(max_length=255,null=True)
     number = models.CharField(max_length=50,null=True)
     email = models.EmailField(unique=True,null=True)
