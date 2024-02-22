@@ -12,9 +12,13 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+# from decouple import config
 
+# from dotenv import load_dotenv 
+# load_dotenv()
 from dotenv import load_dotenv
 load_dotenv() 
+
 
 # install dotenv
 
@@ -30,6 +34,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY =  os.environ.get('SECRET_KEY')
+#
+#SECRET_KEY = os.getenv('SECRET_KEY') if "SECRET_KEY" in os.environ["SECRET_KEY"] else config("SECRET_KEY")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -159,7 +166,7 @@ CORS_ALLOW_METHODS = (
     "GET",
 )
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',
+    'https://b-intel-clone.netlify.app',
 ]
 CORS_ALLOW_HEADERS = (
     "accept",
